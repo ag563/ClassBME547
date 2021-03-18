@@ -35,6 +35,13 @@ def post_new_patient():
     # return/display results
     return answer, server_status
 
+def validate_blood_type(in_data):
+    blood_types = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
+    if in_data["blood_type"] not in blood_type:
+        return "{} is not a valid blood type".format(in_data["blood_type"])
+    return True, 200
+
+
 def validate_new_patient_info(in_dict):
     expected_keys = {"name", "id", "blood_type"}
     expected_types = {str, int, str}
@@ -45,11 +52,14 @@ def validate_new_patient_info(in_dict):
             return "{} key has the wrong value type.".format(key), 400
     return True, 200
 
+
 def process_new_patient(in_data):
     validate_input, server_status = validate_new_patient_info(in_data)
     if validate_input is not True:
         return validate_input, server_status
-
+        valid_blood_type = validate_blood_type(in_data)
+    if valid_blood_type is not True:
+        return valid_blood_type, 400
     # define new patient directory
     add_patient_to_db(in_data["name"],
                     in_data["id"],
