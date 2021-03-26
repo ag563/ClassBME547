@@ -10,7 +10,7 @@ db = list()
 
 def init_server():
     add_patient_to_db("Ann Ables", 101, "A+")
-    add_patient_to_db("BobBoyles", 102, "B-")
+    add_patient_to_db("Bob Boyles", 102, "B-")
 
 
 def add_patient_to_db(name, id, blood_type):
