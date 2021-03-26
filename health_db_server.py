@@ -149,4 +149,4 @@ def get_patient_from_db(patient_id):
 
 if __name__ == '__main__':
     init_server()
-    app.run()
+    app.run(host="0.0.0.0")
